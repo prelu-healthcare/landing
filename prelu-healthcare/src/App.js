@@ -16,7 +16,7 @@ function Nav() {
     <header className={isScrolled ? 'nav nav-scrolled' : 'nav'}>
       <div className="nav-inner">
         <a href="#" className="nav-logo">
-          <div className="nav-logo-icon"><HeartPulse size={22} color="white" strokeWidth={2.5} /></div>
+          <div className="nav-logo-icon"><HeartPulse size={26} color="white" strokeWidth={2.5} /></div>
           <span>Prelu<strong>Healthcare</strong></span>
         </a>
         <div className="nav-links">
@@ -243,7 +243,7 @@ function Footer() {
         <div className="footer-inner">
           <div className="footer-brand">
             <a href="#" className="nav-logo footer-logo">
-              <div className="nav-logo-icon"><HeartPulse size={22} color="white" strokeWidth={2.5} /></div>
+              <div className="nav-logo-icon"><HeartPulse size={26} color="white" strokeWidth={2.5} /></div>
               <span>Prelu<strong>Healthcare</strong></span>
             </a>
             <p>The steady hand that makes sure people get where they need to go, receive the care they deserve, and find the support that helps them thrive.</p>
