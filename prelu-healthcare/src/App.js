@@ -4,8 +4,15 @@ import { HeartPulse, Menu, X, ArrowRight, Phone, Car, ActivitySquare, Home, Shie
 
 function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = React.useEffect(() => {}, []);
+  const [isScrolled, setIsScrolled] = useState(false);
+  React.useEffect(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
   return (
-    <header className="nav">
+    <header className={`nav ${isScrolled ? 'nav-scrolled' : ''}`}>
       <div className="nav-inner">
         <a href="#" className="nav-logo group">
           <div className="nav-logo-icon"><HeartPulse size={22} color="white" strokeWidth={2.5} /></div>
@@ -123,7 +130,7 @@ function WhyUs() {
     <section id="why-us" className="why-us">
       <div className="why-blob-tr" />
       <div className="why-blob-bl" />
-      <div className="container why-inner">
+      <div className="container"><div className="why-inner">
         <div className="why-left">
           <div className="section-label light">Why Choose Us</div>
           <h2>More than a ride. A partner in care.</h2>
@@ -141,7 +148,7 @@ function WhyUs() {
             );
           })}
         </div>
-      </div>
+      </div></div>
     </section>
   );
 }
@@ -165,7 +172,7 @@ function Contact() {
 
   return (
     <section id="contact" className="contact">
-      <div className="container contact-inner">
+      <div className="container"><div className="contact-inner">
         <div className="contact-left">
           <div className="section-label">Get Started</div>
           <h2>Let us handle the journey.</h2>
@@ -219,7 +226,7 @@ function Contact() {
             </form>
           )}
         </div>
-      </div>
+      </div></div>
     </section>
   );
 }
@@ -227,7 +234,7 @@ function Contact() {
 function Footer() {
   return (
     <footer className="footer">
-      <div className="container footer-inner">
+      <div className="container"><div className="footer-inner">
         <div className="footer-brand">
           <a href="#" className="nav-logo group footer-logo">
             <div className="nav-logo-icon"><HeartPulse size={22} color="white" strokeWidth={2.5} /></div>
@@ -248,7 +255,7 @@ function Footer() {
           <a href="#">HIPAA Compliance</a>
         </div>
       </div>
-      <div className="container footer-bottom">
+      </div><div className="container footer-bottom">
         <p>&copy; {new Date().getFullYear()} Prelu Healthcare. All rights reserved.</p>
         <p>Designed for compassionate care.</p>
       </div>
