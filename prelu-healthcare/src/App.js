@@ -1,26 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import { HeartPulse, Menu, X, ArrowRight, Phone, Car, ActivitySquare, Home, ShieldPlus, Users, ShieldCheck, Clock, ClipboardList, HeartHandshake, Navigation, MapPin, Mail, CheckCircle2, Stethoscope } from 'lucide-react';
 
 function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  React.useEffect(() => {
+
+  useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
   return (
-    <header className={`nav ${isScrolled ? 'nav-scrolled' : ''}`}>
+    <header className={isScrolled ? 'nav nav-scrolled' : 'nav'}>
       <div className="nav-inner">
-        <a href="#" className="nav-logo group">
+        <a href="#" className="nav-logo">
           <div className="nav-logo-icon"><HeartPulse size={22} color="white" strokeWidth={2.5} /></div>
           <span>Prelu<strong>Healthcare</strong></span>
         </a>
-        <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
-          <a href="#services" onClick={() => setMenuOpen(false)}>Services</a>
-          <a href="#why-us" onClick={() => setMenuOpen(false)}>Why Us</a>
-          <a href="#contact" className="nav-cta" onClick={() => setMenuOpen(false)}>Contact Us</a>
+        <div className="nav-links">
+          <a href="#services">Services</a>
+          <a href="#why-us">Why Us</a>
+          <a href="#contact" className="nav-cta">Contact Us</a>
         </div>
         <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
           {menuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -51,7 +53,7 @@ function Hero() {
           <h1>The steady hand when you need it <em>most.</em></h1>
           <p>Prelu Healthcare ensures people get where they need to go, to their doctor, to their treatment, back home, with dignity, reliability, and care.</p>
           <div className="hero-actions">
-            <a href="#contact" className="btn-primary group">
+            <a href="#contact" className="btn-primary">
               Get Started
               <span className="btn-arrow"><ArrowRight size={20} strokeWidth={2} /></span>
             </a>
@@ -95,7 +97,7 @@ function Services() {
           {services.map((s) => {
             const Icon = s.icon;
             return (
-              <div className={`service-card ${s.status === 'coming' ? 'coming' : 'active'}`} key={s.id}>
+              <div className={`service-card ${s.status}`} key={s.id}>
                 {s.status === 'coming' && <span className="service-tag">{s.badge}</span>}
                 <div className={`service-icon ${s.status === 'coming' ? 'dim' : ''}`}>
                   <Icon size={28} strokeWidth={2} />
@@ -129,25 +131,27 @@ function WhyUs() {
     <section id="why-us" className="why-us">
       <div className="why-blob-tr" />
       <div className="why-blob-bl" />
-      <div className="container"><div className="why-inner">
-        <div className="why-left">
-          <div className="section-label light">Why Choose Us</div>
-          <h2>More than a ride. A partner in care.</h2>
-          <p>When you entrust us with your loved ones, we treat them as our own. Prelu Healthcare was built on rigorous standards and uncompromising empathy, covering every part of the care journey from transportation to navigation to in-home support.</p>
+      <div className="container">
+        <div className="why-inner">
+          <div className="why-left">
+            <div className="section-label light">Why Choose Us</div>
+            <h2>More than a ride. A partner in care.</h2>
+            <p>When you entrust us with your loved ones, we treat them as our own. Prelu Healthcare was built on rigorous standards and uncompromising empathy, covering every part of the care journey from transportation to navigation to in-home support.</p>
+          </div>
+          <div className="why-grid">
+            {features.map((f, i) => {
+              const Icon = f.icon;
+              return (
+                <div className="why-card" key={i}>
+                  <div className="why-icon"><Icon size={24} strokeWidth={2} /></div>
+                  <h4>{f.title}</h4>
+                  <p>{f.desc}</p>
+                </div>
+              );
+            })}
+          </div>
         </div>
-        <div className="why-grid">
-          {features.map((f, i) => {
-            const Icon = f.icon;
-            return (
-              <div className="why-card" key={i}>
-                <div className="why-icon"><Icon size={24} strokeWidth={2} /></div>
-                <h4>{f.title}</h4>
-                <p>{f.desc}</p>
-              </div>
-            );
-          })}
-        </div>
-      </div></div>
+      </div>
     </section>
   );
 }
@@ -171,61 +175,63 @@ function Contact() {
 
   return (
     <section id="contact" className="contact">
-      <div className="container"><div className="contact-inner">
-        <div className="contact-left">
-          <div className="section-label">Get Started</div>
-          <h2>Let us handle the journey.</h2>
-          <p>Reach out today to schedule transportation or discuss personalized care navigation for your family.</p>
-          <div className="contact-info">
-            <div className="contact-item">
-              <div className="contact-icon"><Phone size={20} /></div>
-              <div><strong>Call Us 24/7</strong><br /><a href="tel:+17209983257">(720) 998-3257</a></div>
-            </div>
-            <div className="contact-item">
-              <div className="contact-icon"><Mail size={20} /></div>
-              <div><strong>Email Us</strong><br /><a href="mailto:hello@preluhealthcare.com">hello@preluhealthcare.com</a></div>
-            </div>
-            <div className="contact-item">
-              <div className="contact-icon"><MapPin size={20} /></div>
-              <div><strong>Headquarters</strong><br />3557 N Duquesne Ct<br />Aurora, Colorado 80019</div>
+      <div className="container">
+        <div className="contact-inner">
+          <div className="contact-left">
+            <div className="section-label">Get Started</div>
+            <h2>Let us handle the journey.</h2>
+            <p>Reach out today to schedule transportation or discuss personalized care navigation for your family.</p>
+            <div className="contact-info">
+              <div className="contact-item">
+                <div className="contact-icon"><Phone size={20} /></div>
+                <div><strong>Call Us 24/7</strong><a href="tel:+17209983257">(720) 998-3257</a></div>
+              </div>
+              <div className="contact-item">
+                <div className="contact-icon"><Mail size={20} /></div>
+                <div><strong>Email Us</strong><a href="mailto:hello@preluhealthcare.com">hello@preluhealthcare.com</a></div>
+              </div>
+              <div className="contact-item">
+                <div className="contact-icon"><MapPin size={20} /></div>
+                <div><strong>Headquarters</strong><span>3557 N Duquesne Ct, Aurora, Colorado 80019</span></div>
+              </div>
             </div>
           </div>
+          <div className="contact-right">
+            {submitted ? (
+              <div className="form-success">
+                <div className="success-icon"><CheckCircle2 size={40} color="#22c55e" /></div>
+                <h4>We've got your request.</h4>
+                <p>A care coordinator will review your information and call you within the next hour.</p>
+                <button className="btn-outline-sm" onClick={() => setSubmitted(false)}>Send another message</button>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit}>
+                <h4>Send a Message</h4>
+                <div className="form-row">
+                  <div className="form-group"><label>First Name</label><input type="text" placeholder="Jane" required value={form.firstName} onChange={e=>setForm({...form,firstName:e.target.value})} /></div>
+                  <div className="form-group"><label>Last Name</label><input type="text" placeholder="Doe" required value={form.lastName} onChange={e=>setForm({...form,lastName:e.target.value})} /></div>
+                </div>
+                <div className="form-row">
+                  <div className="form-group"><label>Phone Number</label><input type="tel" placeholder="(555) 123-4567" required value={form.phone} onChange={e=>setForm({...form,phone:e.target.value})} /></div>
+                  <div className="form-group"><label>Email</label><input type="email" placeholder="jane@example.com" value={form.email} onChange={e=>setForm({...form,email:e.target.value})} /></div>
+                </div>
+                <div className="form-group">
+                  <label>Service Needed</label>
+                  <select required value={form.service} onChange={e=>setForm({...form,service:e.target.value})}>
+                    <option value="">Select a service...</option>
+                    <option>Non-Medical Transport (NMT)</option>
+                    <option>Non-Emergency Medical Transport</option>
+                    <option>Prelu Care Navigator Platform</option>
+                    <option>General Inquiry / Other</option>
+                  </select>
+                </div>
+                <div className="form-group"><label>Message</label><textarea rows="4" placeholder="How can we help you or your loved one today?" required value={form.message} onChange={e=>setForm({...form,message:e.target.value})} /></div>
+                <button type="submit" className="btn-submit" disabled={submitting}>{submitting ? 'Sending...' : 'Request Service'}</button>
+              </form>
+            )}
+          </div>
         </div>
-        <div className="contact-right">
-          {submitted ? (
-            <div className="form-success">
-              <div className="success-icon"><CheckCircle2 size={40} color="#22c55e" /></div>
-              <h4>We've got your request.</h4>
-              <p>A care coordinator will review your information and call you within the next hour to confirm details.</p>
-              <button className="btn-outline-sm" onClick={() => setSubmitted(false)}>Send another message</button>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit}>
-              <h4>Send a Message</h4>
-              <div className="form-row">
-                <div className="form-group"><label>First Name</label><input type="text" name="firstName" placeholder="Jane" required value={form.firstName} onChange={e=>setForm({...form,firstName:e.target.value})} /></div>
-                <div className="form-group"><label>Last Name</label><input type="text" name="lastName" placeholder="Doe" required value={form.lastName} onChange={e=>setForm({...form,lastName:e.target.value})} /></div>
-              </div>
-              <div className="form-row">
-                <div className="form-group"><label>Phone Number</label><input type="tel" name="phone" placeholder="(555) 123-4567" required value={form.phone} onChange={e=>setForm({...form,phone:e.target.value})} /></div>
-                <div className="form-group"><label>Email</label><input type="email" name="email" placeholder="jane@example.com" value={form.email} onChange={e=>setForm({...form,email:e.target.value})} /></div>
-              </div>
-              <div className="form-group">
-                <label>Service Needed</label>
-                <select name="service" required value={form.service} onChange={e=>setForm({...form,service:e.target.value})}>
-                  <option value="">Select a service...</option>
-                  <option>Non-Medical Transport (NMT)</option>
-                  <option>Non-Emergency Medical Transport</option>
-                  <option>Prelu Care Navigator Platform</option>
-                  <option>General Inquiry / Other</option>
-                </select>
-              </div>
-              <div className="form-group"><label>Message</label><textarea name="message" rows="4" placeholder="How can we help you or your loved one today?" required value={form.message} onChange={e=>setForm({...form,message:e.target.value})} /></div>
-              <button type="submit" className="btn-submit" disabled={submitting}>{submitting ? 'Sending...' : 'Request Service'}</button>
-            </form>
-          )}
-        </div>
-      </div></div>
+      </div>
     </section>
   );
 }
@@ -233,30 +239,32 @@ function Contact() {
 function Footer() {
   return (
     <footer className="footer">
-      <div className="container"><div className="footer-inner">
-        <div className="footer-brand">
-          <a href="#" className="nav-logo group footer-logo">
-            <div className="nav-logo-icon"><HeartPulse size={22} color="white" strokeWidth={2.5} /></div>
-            <span>Prelu<strong>Healthcare</strong></span>
-          </a>
-          <p>The steady hand that makes sure people get where they need to go, receive the care they deserve, and find the support that helps them thrive, with dignity, reliability, and compassion.</p>
+      <div className="container">
+        <div className="footer-inner">
+          <div className="footer-brand">
+            <a href="#" className="nav-logo footer-logo">
+              <div className="nav-logo-icon"><HeartPulse size={22} color="white" strokeWidth={2.5} /></div>
+              <span>Prelu<strong>Healthcare</strong></span>
+            </a>
+            <p>The steady hand that makes sure people get where they need to go, receive the care they deserve, and find the support that helps them thrive.</p>
+          </div>
+          <div className="footer-col">
+            <h4>Quick Links</h4>
+            <a href="#services">Our Services</a>
+            <a href="#why-us">Why Choose Us</a>
+            <a href="#contact">Contact Us</a>
+          </div>
+          <div className="footer-col">
+            <h4>Legal</h4>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">HIPAA Compliance</a>
+          </div>
         </div>
-        <div className="footer-col">
-          <h4>Quick Links</h4>
-          <a href="#services">Our Services</a>
-          <a href="#why-us">Why Choose Us</a>
-          <a href="#contact">Contact Us</a>
+        <div className="footer-bottom">
+          <p>&copy; {new Date().getFullYear()} Prelu Healthcare. All rights reserved.</p>
+          <p>Designed for compassionate care.</p>
         </div>
-        <div className="footer-col">
-          <h4>Legal</h4>
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Service</a>
-          <a href="#">HIPAA Compliance</a>
-        </div>
-      </div>
-      </div><div className="container footer-bottom">
-        <p>&copy; {new Date().getFullYear()} Prelu Healthcare. All rights reserved.</p>
-        <p>Designed for compassionate care.</p>
       </div>
     </footer>
   );
