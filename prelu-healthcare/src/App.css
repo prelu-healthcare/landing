@@ -95,7 +95,7 @@ a { text-decoration: none; color: inherit; }
 .service-card.coming { background: rgba(248,250,252,0.5); }
 .service-tag { position: absolute; top: 24px; right: 24px; background: rgba(15,23,42,0.1); color: var(--dark); font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 50px; }
 .service-icon { width: 56px; height: 56px; background: rgba(6,182,212,0.1); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; color: var(--teal); transition: background 0.2s, color 0.2s; }
-.service-card.active:hover .service-icon { background: rgba(6,182,212,0.2); color: var(--teal); }
+.service-card.active:hover .service-icon { background: var(--teal); color: white; }
 .service-icon.dim { background: #f1f5f9; color: #94a3b8; }
 .service-card.dim, .service-icon.dim { opacity: 0.6; }
 .service-card h4 { font-size: 20px; font-weight: 700; color: var(--dark); margin-bottom: 12px; }
@@ -167,3 +167,4 @@ a { text-decoration: none; color: inherit; }
 .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 32px; display: flex; flex-direction: column; gap: 8px; }
 @media(min-width:768px){ .footer-bottom { flex-direction: row; justify-content: space-between; align-items: center; } }
 .footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.4); }
+
