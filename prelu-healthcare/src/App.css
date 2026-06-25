@@ -110,7 +110,7 @@ a { text-decoration: none; color: inherit; }
 .why-blob-tr { position: absolute; top: 0; right: 0; width: 800px; height: 800px; background: rgba(6,182,212,0.1); border-radius: 50%; filter: blur(100px); transform: translate(33%, -50%); pointer-events: none; }
 .why-blob-bl { position: absolute; bottom: 0; left: 0; width: 600px; height: 600px; background: rgba(255,255,255,0.05); border-radius: 50%; filter: blur(80px); transform: translate(-25%, 33%); pointer-events: none; }
 .why-inner { display: grid; grid-template-columns: 1fr; gap: 64px; position: relative; z-index: 1; }
-@media(min-width:1024px){ .why-inner { grid-template-columns: 2fr 3fr; align-items: start; } }
+@media(min-width:1024px){ .why-inner { grid-template-columns: 2fr 3fr; align-items: center; } }
 .why-left h2 { font-size: clamp(28px, 4vw, 48px); font-weight: 700; color: white; margin-bottom: 24px; letter-spacing: -0.5px; line-height: 1.15; }
 .why-left p { font-size: 16px; color: rgba(255,255,255,0.7); line-height: 1.8; }
 .why-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
