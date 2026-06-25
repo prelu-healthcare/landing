@@ -4,7 +4,6 @@ import { HeartPulse, Menu, X, ArrowRight, Phone, Car, ActivitySquare, Home, Shie
 
 function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = React.useEffect(() => {}, []);
   const [isScrolled, setIsScrolled] = useState(false);
   React.useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 20);
